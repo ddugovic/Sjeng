@@ -1,0 +1,23 @@
+language: c
+
+matrix:
+  include:
+  - os: linux
+    sudo: required
+    services:
+    - docker
+    env:
+    - EXE=sjeng-x86_64
+  - os: osx
+    compiler: clang
+    env:
+    - EXE=sjeng-osx-x86_64
+
+script: |
+  if [ "$EXE" != "sjeng-x86_64" ]; then
+    docker build --tag wheezy-for-sjeng .
+    docker run --volume $PWD:/home/builder/Sjeng --user $(id -u) wheezy-for-sjeng
+  else
+    make EXE="$EXE"
+  fi
+  ls -lh
