@@ -544,7 +544,7 @@ void hash_extract_pv(int level, char str[])
       num_moves = numb_moves;
       if ((bm >= 0) && (bm < num_moves))
 	{
-	  comp_to_san(moves[bm], output);
+	  comp_to_coord(moves[bm], output);
 	  make(&moves[0], bm);
 	  if (check_legal(&moves[0], bm, 1))
 	    {
@@ -568,7 +568,7 @@ void stringize_pv (char str[])
 
    for (i = 1; i < pv_length[1]; i++) 
    {
-        	comp_to_san (pv[1][i], output);
+        	comp_to_coord (pv[1][i], output);
           	make(&pv[1][i], 0);
           	strcat (str, output);
 	  	strcat (str, " ");
@@ -610,7 +610,7 @@ void post_thinking (long int score) {
       }
     
    for (i = 1; i < pv_length[1]; i++) {
-     comp_to_san (pv[1][i], output);
+     comp_to_coord (pv[1][i], output);
      make(&pv[1][i], 0);
      printf ("%s ", output);
    }
@@ -644,7 +644,7 @@ void post_fail_thinking(long int score, move_s *failmove)
     elapsed = rdifftime (rtime (), start_time);
     printf ("%2d %7ld %5ld %8ld  ", i_depth, score, elapsed, nodes);
     unmake(failmove, 0);
-    comp_to_san (*failmove, output);
+    comp_to_coord (*failmove, output);
     make(failmove, 0);
     printf ("%s !", output);
     printf ("\n");
@@ -662,7 +662,7 @@ void post_fh_thinking(long int score, move_s *failmove)
     elapsed = rdifftime (rtime (), start_time);
     printf ("%2d %7ld %5ld %8ld  ", i_depth, score, elapsed, nodes);
     unmake(failmove, 0);
-    comp_to_san (*failmove, output);
+    comp_to_coord (*failmove, output);
     make(failmove, 0);
     printf ("%s !!", output);
     printf ("\n");
@@ -680,7 +680,7 @@ void post_fl_thinking(long int score, move_s *failmove)
     elapsed = rdifftime (rtime (), start_time);
     printf ("%2d %7ld %5ld %8ld  ", i_depth, score, elapsed, nodes);
     unmake(failmove, 0);
-    comp_to_san (*failmove, output);
+    comp_to_coord (*failmove, output);
     make(failmove, 0);
     printf ("%s ??", output);
     printf ("\n");

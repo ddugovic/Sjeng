@@ -1191,7 +1191,7 @@ move_s search_root (int originalalpha, int originalbeta, int depth) {
       unmake(&moves[0], i);
       mc++;
       moveleft = movetotal - mc;
-      comp_to_san(moves[i], searching_move);
+      comp_to_coord(moves[i], searching_move);
       make(&moves[0], i);
       
       nodes++;
@@ -1569,7 +1569,7 @@ restart:
      
      if (comp_move.target != 0) 
        {
-	 comp_to_san (comp_move, postmove);
+	 comp_to_coord (comp_move, postmove);
 	 printf("0 0 0 0 %s (Book Move)\n", postmove);
 	 cpu_end = clock ();
 	 
