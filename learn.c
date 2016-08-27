@@ -38,6 +38,7 @@ LearnType;
 
 void Learn(int score, int best, int depth)
 {
+#ifdef NO_LEARN
   int number = 0, next = 0;
   LearnType draft;
   FILE **lrnfile;
@@ -89,6 +90,7 @@ void Learn(int score, int best, int depth)
   fwrite(&draft, sizeof(draft), 1, *lrnfile);
   
   fflush(*lrnfile);
+#endif
 }
 
 void LoadLearn(void)
