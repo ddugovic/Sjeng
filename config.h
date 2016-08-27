@@ -35,7 +35,7 @@
 #define HAVE_UNISTD_H 1
 
 /* Define if you have the gdbm library (-lgdbm).  */
-#define HAVE_LIBGDBM 1
+#undef HAVE_LIBGDBM
 
 /* Define if you have the m library (-lm).  */
 #define HAVE_LIBM 1

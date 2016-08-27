@@ -24,7 +24,6 @@
 #include "sjeng.h"
 #include "protos.h"
 #include "extvars.h"
-#include "gdbm.h"
 #include <sys/stat.h>
 #include <math.h>
 
@@ -32,7 +31,9 @@
 #define PLAYTHRESHOLD 3
 
 #ifndef HAVE_LIBGDBM
-#error You need the GNU DBM library (GDBM). Go to ftp.gnu.org
+// #error You need the GNU DBM library (GDBM). Go to ftp.gnu.org
+#else
+#include "gdbm.h"
 #endif
 
 typedef struct 
@@ -111,6 +112,7 @@ void get_header(FILE *pgnbook, pgn_header_t *pgn_header)
     }
 }
 
+#ifdef HAVE_LIBGDBM
 void add_current(GDBM_FILE binbook, pgn_header_t pgn_header)
 {
   hashkey_t key;
@@ -370,9 +372,11 @@ void weed_book(GDBM_FILE binbook)
   
   printf("Done.\n");	
 }
+#endif
 
 void build_book (void)
 {
+#ifdef HAVE_LIBGDBM
   FILE *pgnbook;
   GDBM_FILE binbook;
   pgn_header_t pgn_header;
@@ -445,11 +449,14 @@ void build_book (void)
 
   alloc_hash();
   alloc_ecache();
+#endif
 }
-
 
 move_s choose_binary_book_move (void) 
 {
+#ifndef HAVE_LIBGDBM
+  return dummy;
+#else
   GDBM_FILE binbook;
   hashkey_t key;
   posinfo_t *ps;
@@ -588,11 +595,13 @@ move_s choose_binary_book_move (void)
    unmake(&bestmove, 0);
     
    return bestmove;   
+#endif
 }
 
 
 void book_learning(int result)
 {
+#ifdef HAVE_LIBGDBM
   GDBM_FILE binbook;
   hashkey_t key;
   posinfo_t *ps;
@@ -697,4 +706,5 @@ void book_learning(int result)
   gdbm_close(binbook);
 
   return;
-};
+#endif
+}
