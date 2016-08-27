@@ -21,3 +21,17 @@ script: |
     make EXE="$EXE"
   fi
   ls -lh
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Acwku9Vutj1jZZsJRQnSA4dz9aLJi13PWEIOVCdIz7ppA2UMeYAZ6SVkj0CAzK3M0cA+MXFhDFwqp6jNTam57Za7b2eNNH/Lxogmek3NZPp4mD1t2Fy9ZTJ9jz23WQmb7y0xaKr/40B9bBfxWgEdglDudSi6jYlJ6R8wQLE4+YN1RZaggRXSMi1l1+wYEDMOu/b82+aMdWNfa9yUipjbfSv+AWUxpbn/FRWK/B7yrkGPdePFL/TW9NDPiUK21WFPJfKLeZ7a9GL1ELrbf9R47iOHUZcGtK8ZPHhn9e8H8IECWkASj3jx6paqRPOGVrKoxxg4UefFIZm720NCOVOTMvuuXOU5hmOknzpT21pshNeDYQxnM4IwjAzHLvabg9WO5w9cjWFDShhmcybMnlhFFqB7NhMSE8SCuljU8sKAaKCJXy52jRGBRE1clTGtgTAyLPiD4vBmyMO4EmhfsCfEEVeV51YSDm2z7MsYH0OrvWH114Bs5hMhXQTV+Mi1FOpvPOWvhtdVFogImKoxDpE4M7fYsIXNjpkVtFyLy6WKMX5HCqnrSSGWhjiqwb/UZs+kw4G7RJbXmE5NtP7YOQKOBV/+6fb5FQOp2bHPlY3+uzbwASihw3Hl84iaPfdxY6V44OtaoXbiH6Pr1YVhkhJO98NCNkStvt8ZcM96ii2+nGw=
+  prerelease: true
+  skip_cleanup: true
+  file_glob: true
+  file:
+  - $EXE
+  on:
+    tags: true
+    repo: niklasf/Sjeng
+    branch: master
