@@ -85,10 +85,10 @@ bool go_fast;
 
 long fixed_time;
 
-FILE *lrn_standard;
-FILE *lrn_zh;
-FILE *lrn_suicide;
-FILE *lrn_losers;
+FILE *lrn_standard = NULL;
+FILE *lrn_zh = NULL;
+FILE *lrn_suicide = NULL;
+FILE *lrn_losers = NULL;
 
 int main (int argc, char *argv[]) {
 
@@ -119,6 +119,7 @@ int main (int argc, char *argv[]) {
   if (!init_book())
     printf("No .OPN opening book found.\n");
 
+#ifndef NO_LEARN
   if ((lrn_standard = fopen ("standard.lrn", "rb+")) == NULL)
     {
       printf("No standard learn file.\n");
@@ -175,6 +176,7 @@ int main (int argc, char *argv[]) {
 	  lrn_losers = fopen ("losers.lrn", "rb+");
 	}
     }
+#endif  // #ifdef NO_LEARN
 
   start_up ();
   init_game ();
@@ -479,10 +481,10 @@ int main (int argc, char *argv[]) {
 
       /* command parsing: */
       if (!strcmp (input, "quit")) {
-	fclose(lrn_standard);
-	fclose(lrn_zh);
-	fclose(lrn_suicide);
-	fclose(lrn_losers);
+	if (lrn_standard) fclose(lrn_standard);
+	if (lrn_zh) fclose(lrn_zh);
+	if (lrn_suicide) fclose(lrn_suicide);
+	if (lrn_losers) fclose(lrn_losers);
 	free_hash();
 	free_ecache();
 	exit (EXIT_SUCCESS);
@@ -497,10 +499,10 @@ int main (int argc, char *argv[]) {
 	    }
 	  else
 	    {
-	      fclose(lrn_standard);
-	      fclose(lrn_zh);
-	      fclose(lrn_suicide);
-	      fclose(lrn_losers);
+	      if (lrn_standard) fclose(lrn_standard);
+	      if (lrn_zh) fclose(lrn_zh);
+	      if (lrn_suicide) fclose(lrn_suicide);
+	      if (lrn_losers) fclose(lrn_losers);
 	      free_hash();
 	      free_ecache();
 	      exit (EXIT_SUCCESS);
