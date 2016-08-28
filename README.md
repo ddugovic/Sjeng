@@ -14,6 +14,13 @@ Linux | [![travis-ci](https://travis-ci.org/niklasf/Sjeng.svg?branch=master)](ht
 Mac OS | [![travis-ci](https://travis-ci.org/niklasf/Sjeng.svg?branch=master)](https://travis-ci.org/niklasf/Sjeng)
 Windows | [![appveyor](https://ci.appveyor.com/api/projects/status/qy1ip0hahkarvg10?svg=true)](https://ci.appveyor.com/project/niklasf/sjeng)
 
+Changes
+-------
+
+* Support floats for `st`
+* Use UCI notation (instead of SAN) for PVs
+* Allow disabling learn and books
+
 License
 -------
 
