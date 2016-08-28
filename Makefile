@@ -9,6 +9,10 @@ OBJS = attacks.o book.o draw.o epd.o learn.o moves.o newbook.o probe.o \
 $(EXE): .depend $(OBJS)
 	$(CC) -o $@ $(OBJS) $(LDFLAGS)
 
+.PHONY: clean
+clean:
+	rm -f $(EXE) $(OBJS)
+
 .depend:
 	$(CC) $(DEPENDFLAGS) -MM $(OBJS:.o=.c) > $@
 
