@@ -14,7 +14,7 @@ matrix:
     - EXE=sjeng-osx-x86_64
 
 script: |
-  if [ "$EXE" != "sjeng-x86_64" ]; then
+  if [ "$EXE" != "sjeng-osx-x86_64" ]; then
     docker build --tag wheezy-for-sjeng .
     docker run --volume $PWD:/home/builder/Sjeng --user $(id -u) wheezy-for-sjeng
   else
