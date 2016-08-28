@@ -93,6 +93,7 @@ FILE *lrn_losers = NULL;
 int main (int argc, char *argv[]) {
 
   char input[STR_BUFF], *p, output[STR_BUFF];
+  float input_fixed_time;
   char readbuff[STR_BUFF];
   move_s move, comp_move;
   int depth = 4;
@@ -791,8 +792,8 @@ int main (int argc, char *argv[]) {
 	run_epd_testsuite();
       }
       else if (!strncmp (input, "st", 2)) {
-	sscanf(input+3, "%d", &fixed_time);
-	fixed_time = fixed_time * 100;
+	sscanf(input+3, "%f", &input_fixed_time);
+	fixed_time = input_fixed_time * 100;
       }
       else if (!strncmp (input, "book", 4)) {
 	build_book();
