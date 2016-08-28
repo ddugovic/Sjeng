@@ -20,19 +20,27 @@
 #define HAVE_GETTIMEOFDAY 1
 
 /* Define if you have the select function.  */
+#ifndef _WIN32
 #define HAVE_SELECT 1
+#endif
 
 /* Define if you have the strstr function.  */
 #define HAVE_STRSTR 1
 
 /* Define if you have the <sys/time.h> header file.  */
+#ifndef _WIN32
 #define HAVE_SYS_TIME_H 1
+#endif
 
 /* Define if you have the <sys/timeb.h> header file.  */
+#ifndef _WIN32
 #define HAVE_SYS_TIMEB_H 1
+#endif
 
 /* Define if you have the <unistd.h> header file.  */
+#ifndef _WIN32
 #define HAVE_UNISTD_H 1
+#endif
 
 /* Define if you have the gdbm library (-lgdbm).  */
 #undef HAVE_LIBGDBM
