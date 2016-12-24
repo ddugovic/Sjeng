@@ -238,29 +238,82 @@ void perft (int depth) {
     return;
   }
 
-  /* generate the move list: */
-  gen (&moves[0]);
-  num_moves = numb_moves;
-
   ic = in_check();
+  if (Variant == Losers)
+    {
+      /* generate the capture-move list: */
+      legals = 0;
+      captures = TRUE;
+      gen (&moves[0]);
+      num_moves = numb_moves;
+      captures = FALSE;
 
-  /* loop through the moves at the current depth: */
-  for (i = 0; i < num_moves; i++) {
-    make (&moves[0], i);
+      if (num_moves)
+	{
+          /* loop through the capture-moves at the current depth: */
+	  for (i = 0; i < num_moves; i++)
+	    {
+	      make(&moves[0], i);
+	      /* check to see if our capture-move is legal: */
+	      if (check_legal(&moves[0], i, ic))
+		{
+		  legals++;
+		  /* go deeper into the tree recursively, increasing the indent
+		     to create the "tree" effect: */
+		  perft (depth-1);
+		}
+	      /* unmake the capture-move to go onto the next: */
+	      unmake(&moves[0], i);
+	    }
+	}
 
-    /* check to see if our move is legal: */
-    if (check_legal (&moves[0], i, ic)) {
-      /* go deeper into the tree recursively, increasing the indent to
-	 create the "tree" effect: */
-      perft (depth-1);
+      if (!legals)
+	{
+          /* generate the move list: */
+	  captures = FALSE;
+	  gen(&moves[0]);
+	  num_moves = numb_moves;
+
+          /* loop through the moves at the current depth: */
+	  for (i = 0; i < num_moves; i++)
+	    {
+	      make(&moves[0], i);
+	      /* check to see if our move is legal: */
+	      if (check_legal(&moves[0], i, ic))
+		{
+		  legals++;
+		  /* go deeper into the tree recursively, increasing the indent
+		     to create the "tree" effect: */
+		  perft (depth-1);
+		}
+	      /* unmake the move to go onto the next: */
+	      unmake(&moves[0], i);
+	    }
+	};
+    }
+  else
+    {
+      /* generate the move list: */
+      gen (&moves[0]);
+      num_moves = numb_moves;
+
+      /* loop through the moves at the current depth: */
+      for (i = 0; i < num_moves; i++) {
+	  make (&moves[0], i);
+
+	/* check to see if our move is legal: */
+	if (check_legal (&moves[0], i, ic)) {
+	  /* go deeper into the tree recursively, increasing the indent
+	     to create the "tree" effect: */
+	  perft (depth-1);
+	}
+
+	/* unmake the move to go onto the next: */
+	unmake (&moves[0], i);
+      }
     }
 
-    /* unmake the move to go onto the next: */
-    unmake (&moves[0], i);
-  }
-
   //ep_square = ep_temp;
-
 }
 
 
